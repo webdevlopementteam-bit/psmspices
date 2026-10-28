@@ -48,7 +48,7 @@ export default function Footer() {
               one of the oldest civilizations, India was among the pioneers in unlocking the
               medicinal properties of spices.
             </p>
-            <SocialIcons />
+            <SocialIcons linkedOnly />
           </div>
 
           <div className="px-[10px]">

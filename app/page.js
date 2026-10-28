@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { homeProducts } from "./data";
 import AboutCompany from "./components/AboutCompany";
-import HeroVideo from "./components/HeroVideo";
+import { preconnect } from "react-dom";
 import { ProductGrid } from "./components/ProductCard";
 import { PlusIcon } from "./components/Icons";
 
@@ -14,7 +14,20 @@ const gallery = [
 ];
 
 function Hero() {
-  return <HeroVideo videoId={HERO_VIDEO_ID} poster="/images/hero-poster.webp" />;
+  // Start connecting to YouTube while the page loads so the video begins sooner.
+  preconnect("https://www.youtube.com");
+  preconnect("https://i.ytimg.com");
+
+  return (
+    <section className="relative min-h-[280px] overflow-hidden bg-black md:min-h-[560px]">
+      <iframe
+        title="PSM Spices"
+        src={`https://www.youtube.com/embed/${HERO_VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${HERO_VIDEO_ID}&controls=0&showinfo=0&modestbranding=1&rel=0&playsinline=1`}
+        allow="autoplay; encrypted-media"
+        className="pointer-events-none absolute top-1/2 left-1/2 aspect-video min-h-full w-[max(100%,177.78vh)] -translate-x-1/2 -translate-y-1/2 border-0"
+      />
+    </section>
+  );
 }
 
 function Gallery() {

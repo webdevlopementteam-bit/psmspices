@@ -3,12 +3,16 @@ import { FacebookIcon, TwitterIcon, YoutubeIcon } from "./Icons";
 
 const icons = { Facebook: FacebookIcon, Twitter: TwitterIcon, Youtube: YoutubeIcon };
 
-export default function SocialIcons({ small = false, className = "" }) {
+// `linkedOnly` hides icons whose href is still the "#" placeholder.
+export default function SocialIcons({ small = false, linkedOnly = false, className = "" }) {
+  const links = linkedOnly ? socialLinks.filter(({ href }) => href && href !== "#") : socialLinks;
+  if (links.length === 0) return null;
+
   const box = small ? "h-[30px] w-[30px]" : "h-[44px] w-[44px]";
   const icon = small ? "h-[15px] w-[15px]" : "h-[22px] w-[22px]";
   return (
     <div className={`flex gap-[5px] ${className}`}>
-      {socialLinks.map(({ name, href }) => {
+      {links.map(({ name, href }) => {
         const Icon = icons[name];
         return (
           <a
